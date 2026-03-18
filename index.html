@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="CV van Arham Yaseen, Informatica- en communicatiewetenschappen." />
-  <meta name="keywords" content="Arham Yaseen, CV, Informatica, Communicatiewetenschappen, Sint-Pieters-Leeuw" />
+  <meta name="description" content="CV van Arham Yaseen – Student Informatica & Communicatiewetenschappen, gespecialiseerd in klantenservice en technologie." />
+  <meta name="keywords" content="Arham Yaseen, CV, Informatica, Communicatiewetenschappen, België" />
   <meta name="author" content="Arham Yaseen" />
   <title>Arham Yaseen – CV</title>
 
@@ -83,7 +83,7 @@
       z-index: 1;
       max-width: 900px;
       margin: 0 auto;
-      padding: 2rem 1.25rem 5rem;
+      padding: 0 1.25rem 5rem;
     }
 
     /* ── Nav ── */
@@ -111,18 +111,62 @@
     }
     nav a:hover { color: var(--accent); background: rgba(110,231,247,0.08); }
 
-    /* ── Hero ── */
+    /* ── Hero – fullscreen parallax ── */
+    .hero-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      will-change: opacity;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.38) saturate(1.2);
+      display: block;
+    }
+    /* Colour tint overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(5,13,26,0.55) 0%,
+        rgba(110,231,247,0.08) 50%,
+        rgba(167,139,250,0.12) 100%
+      );
+    }
+    /* Fade-out gradient at bottom so content flows in smoothly */
+    .hero-bg-fade {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 45vh;
+      background: linear-gradient(to bottom, transparent, #050d1a);
+      z-index: 0;
+      pointer-events: none;
+      will-change: opacity;
+    }
+
+    /* Hero content centered on screen */
     .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 6.5rem 2rem 3rem;
+      padding: 7rem 1.5rem 5rem;
       gap: 1.5rem;
     }
     .avatar-ring {
-      width: 130px;
-      height: 130px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       padding: 3px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -138,29 +182,29 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.75rem;
+      font-size: 2.2rem;
       color: var(--accent);
     }
     .hero-name {
-      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-size: clamp(2.4rem, 7vw, 4rem);
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.08;
       letter-spacing: -0.03em;
       background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .hero-title {
-      font-size: 1rem;
+      font-size: 0.88rem;
       color: var(--accent);
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
     .hero-summary {
-      max-width: 540px;
-      color: var(--text-muted);
-      font-size: 0.97rem;
+      max-width: 520px;
+      color: rgba(240,244,255,0.82);
+      font-size: 1rem;
       line-height: 1.75;
     }
     .contact-pills {
@@ -168,6 +212,27 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 0.6rem;
+    }
+    /* Scroll hint arrow */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .scroll-hint i { font-size: 1rem; color: var(--accent); }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
     }
     .pill {
       display: flex;
@@ -432,17 +497,26 @@
     <a href="#projects">Projecten</a>
   </nav>
 
+  <!-- ── HERO ACHTERGROND FOTO (fixed, fadet weg bij scrollen) ── -->
+  <div class="hero-bg" id="heroBg">
+    <img
+      src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&q=85"
+      alt="Programmeren achtergrond"
+      loading="eager"
+    />
+  </div>
+  <div class="hero-bg-fade" id="heroBgFade"></div>
+
   <!-- ── Main content ── -->
   <main class="wrapper">
 
     <!-- ── HERO ── -->
     <header id="about" class="hero fade-in">
 
-      <!-- Profile photo – vervang 'photo.jpg' door jouw echte foto -->
+      <!-- Avatar -->
       <div class="avatar-ring">
-        <!-- Als je een foto hebt: <img src="photo.jpg" alt="Arham Yaseen"> -->
-        <!-- Tijdelijke placeholder: -->
-        <div class="avatar-placeholder" style="display:flex;align-items:center;justify-content:center;font-size:2.75rem;">
+        <!-- Vervang door jouw foto: <img src="photo.jpg" alt="Arham Yaseen"> -->
+        <div class="avatar-placeholder" style="display:flex;align-items:center;justify-content:center;">
           <i class="fa-solid fa-user"></i>
         </div>
       </div>
@@ -470,10 +544,16 @@
         </span>
       </div>
 
-      <!-- Download button – vervang 'Arham_Yaseen_CV.pdf' door de juiste bestandsnaam -->
+      <!-- Download button -->
       <a href="Arham_Yaseen_CV.pdf" download class="btn-download">
         <i class="fa-solid fa-download"></i> Download CV
       </a>
+
+      <!-- Scroll hint -->
+      <div class="scroll-hint">
+        <i class="fa-solid fa-chevron-down"></i>
+        <span>Scroll</span>
+      </div>
 
     </header>
 
@@ -543,7 +623,7 @@
           <div class="tl-card glass">
             <p class="tl-role">Informatica- en Communicatiewetenschappen</p>
             <p class="tl-org">Don Bosco Halle</p>
-            <p class="tl-date"><i class="fa-regular fa-calendar" style="margin-right:0.3rem;"></i>2024 - 2026</p>
+            <p class="tl-date"><i class="fa-regular fa-calendar" style="margin-right:0.3rem;"></i>2024 (huidig)</p>
           </div>
         </div>
 
@@ -554,7 +634,7 @@
           <div class="tl-card glass">
             <p class="tl-role">Moderne Talen Wetenschap</p>
             <p class="tl-org">Sint-Niklaas Instituut – Anderlecht</p>
-            <p class="tl-date"><i class="fa-regular fa-calendar" style="margin-right:0.3rem;"></i>2019 - 2024</p>
+            <p class="tl-date"><i class="fa-regular fa-calendar" style="margin-right:0.3rem;"></i>2019</p>
           </div>
         </div>
 
@@ -698,17 +778,45 @@
 
       </div>
 
+      <!-- Note to self -->
+      <p style="margin-top:1rem; font-size:0.78rem; color:var(--text-muted); text-align:center;">
+        💡 <em>Tip: voeg hier extra projecten toe met screenshots als <code>img</code>-tags.</em>
+      </p>
+    </section>
 
   </main>
 
   <!-- ── Footer ── -->
   <footer>
-    <p>© 2026 Arham Yaseen &nbsp;·&nbsp; Gebouwd met HTML &amp; Tailwind CSS</p>
+    <p>© 2025 Arham Yaseen &nbsp;·&nbsp; Gebouwd met HTML &amp; Tailwind CSS</p>
   </footer>
 
   <!-- ── JavaScript: animations & skill bars ── -->
   <script>
-    // Fade-in on scroll
+    // ── Fade hero background on scroll ──
+    const heroBg   = document.getElementById('heroBg');
+    const heroBgFade = document.getElementById('heroBgFade');
+    const fadeStart = 80;   // px scrolled before fade starts
+    const fadeEnd   = window.innerHeight * 0.75; // fully gone at 75vh
+
+    function updateHeroFade() {
+      const y = window.scrollY;
+      if (y <= fadeStart) {
+        heroBg.style.opacity = '1';
+        heroBgFade.style.opacity = '1';
+      } else if (y >= fadeEnd) {
+        heroBg.style.opacity = '0';
+        heroBgFade.style.opacity = '0';
+      } else {
+        const progress = (y - fadeStart) / (fadeEnd - fadeStart);
+        heroBg.style.opacity = 1 - progress;
+        heroBgFade.style.opacity = 1 - progress;
+      }
+    }
+    window.addEventListener('scroll', updateHeroFade, { passive: true });
+    updateHeroFade();
+
+    // ── Fade-in on scroll ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -727,15 +835,4 @@
           e.target.querySelectorAll('.skill-item').forEach(item => {
             const w = item.dataset.width;
             item.querySelector('.skill-fill').style.width = w + '%';
-          });
-          skillObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    const skillSection = document.getElementById('skillBars');
-    if (skillSection) skillObserver.observe(skillSection);
-  </script>
-
-</body>
-</html>
+        
